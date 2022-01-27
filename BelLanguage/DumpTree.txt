@@ -1,0 +1,42 @@
+digraph D {
+    45344 [fillcolor=purple, style="rounded,filled", label="define"];
+    45344 -> 45264;
+
+    45264 [fillcolor=cyan, style="rounded,filled", label="function"];
+    45264 -> 43152;
+
+    43152 [fillcolor=yellow, shape=box, style="filled", label="main"];
+    45264 -> 45024 [ color = red ];
+
+    45024 [fillcolor=cyan, style="rounded,filled", label="parameter"];
+    45024 -> 44944;
+
+    44944 [fillcolor=cyan, style="rounded,filled", label="parameter"];
+    44944 -> 43232 [ color = red ];
+
+    43232 [fillcolor=yellow, shape=box, style="filled", label="a"];
+    45024 -> 43312 [ color = red ];
+
+    43312 [fillcolor=yellow, shape=box, style="filled", label="b"];
+    45344 -> 45184 [ color = red ];
+
+    45184 [fillcolor=cyan, style="rounded,filled", label="statement"];
+    45184 -> 43472 [ color = red ];
+
+    43472 [fillcolor=cyan, style="rounded,filled", label="="];
+    43472 -> 43432;
+
+    43432 [fillcolor=yellow, shape=box, style="filled", label="b"];
+    43472 -> 45104 [ color = red ];
+
+    45104 [fillcolor=cyan, style="rounded,filled", label="identifier"];
+    45104 -> 43552 [ color = red ];
+
+    43552 [fillcolor=cyan, style="rounded,filled", label="+"];
+    43552 -> 43512;
+
+    43512 [fillcolor=yellow, shape=box, style="filled", label="b"];
+    43552 -> 43592 [ color = red ];
+
+    43592 [fillcolor=yellow, shape=box, style="filled", label="1"];
+}

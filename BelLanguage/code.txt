@@ -1,0 +1,6 @@
+main (a, b)
+begin
+	b = b + 1
+end
+
+
