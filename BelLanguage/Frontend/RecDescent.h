@@ -23,32 +23,44 @@ enum FUNCTION_TYPES {
     SQRT
 };
 
-TreeNode *GetP (Token *token, int *index);
+struct MemoryController {
+    TreeNode **adr;
 
-TreeNode *GetFuncDef (Token *token, int *index);
+    int size;
+};
 
-TreeNode *GetArgs (Token *token, int *index);
+TreeNode *GetP (Token *token, int *index, MemoryController *mem);
 
-void Require (Token *token, char *symbol, int *index);
+TreeNode *GetCode (Token *token, int *index, MemoryController *mem);
 
-int GetString (char *str, char **exp);
+TreeNode *GetFuncDef (Token *token, int *index, MemoryController *mem);
+
+TreeNode *GetArgs (Token *token, int *index, MemoryController *mem);
+
+TreeNode *GetFunctions (Token *token, int *index, MemoryController *mem);
 
 void SyntaxError ();
 
 TreeNode *GetN (Token *token, int *index);
 
-TreeNode *GetG (Token *token, int *index);
+TreeNode *GetG (Token *token, int *index, MemoryController *mem);
 
-TreeNode *GetE (Token *token, int *index);
+TreeNode *GetE (Token *token, int *index, MemoryController *mem);
 
-TreeNode *GetT (Token *token, int *index);
+TreeNode *GetT (Token *token, int *index, MemoryController *mem);
 
-TreeNode *GetExponent (Token *token, int *index);
+TreeNode *GetExponent (Token *token, int *index, MemoryController *mem);
 
-TreeNode *GetAssign (Token *token, int *index);
+TreeNode *GetAssign (Token *token, int *index, MemoryController *mem);
 
-TreeNode *GetStatement (Token *token, int *index);
+TreeNode *GetStatement (Token *token, int *index, MemoryController *mem);
 
-TreeNode *GetCondition (Token *token, int *index);
+TreeNode *GetCondition (Token *token, int *index, MemoryController *mem);
+
+TreeNode *GetFuncCall (Token *token, int *index, MemoryController *mem);
+
+void PushNodeToMemArr (MemoryController *mem, TreeNode *node);
+
+void Require (Token *token, const char *symbol, int *index);
 
 #endif

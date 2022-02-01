@@ -22,3 +22,7 @@ int CheckForKeyWord (char *src);
 int GetTypeOfNode (char *src);
 
 void SetName (TreeNode *node, char *src);
+
+int GetNumberOfNode (char *src);
+
+void SeparateText (Token *token, char *src);

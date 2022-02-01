@@ -23,7 +23,7 @@ int GetString (char *str);
 
 int GetFileSize (FILE *sample);
 
-int GetBuffer (char **buff, const char *fileName);
+char *GetBuffer (const char *fileName);
 
 void PrintErrors (const int type);
 

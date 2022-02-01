@@ -1,6 +1,24 @@
-main (a, b)
+a = 89
+b = 67
+
+main ()
 begin
-	b = b + 1
+	pakul(a > 45)
+	begin
+		a = a + 1
+	end
 end
+
+sum (b, c)
+begin
+	b = b + c;
+	a = 567
+end
+
+sub ()
+begin
+	vyarnut 1
+end
+
 
 

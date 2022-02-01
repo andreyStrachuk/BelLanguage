@@ -7,23 +7,25 @@
 #include "../Text/TextAnalyze.h"
 
 struct TreeNode {
-    char type;
-
-    void *data;
-
     TreeNode *left;
     TreeNode *right;
     TreeNode *parent;
+
+    char type;
+    char number;
+
+    void *data;
 };
 
 enum TypeOfToken {
     KEYWORD,
-    IDENTIFIER,
+    INITIALIZER,
     STATEMENT,
     NUMBER,
     VARIABLE,
     PARENTHESIS,
     FUNCTION,
+    MAIN,
     CONDITION,
     OPERATION,
     END_OF_STR,

@@ -12,12 +12,8 @@ void DestructTree (TreeNode *topNode) {
 
     DestructTree (topNode->right);
 
-    free (topNode->right);
-
     if (topNode->left != nullptr) {
         DestructTree (topNode->left);
-
-        free (topNode->left);
     }
 }
 

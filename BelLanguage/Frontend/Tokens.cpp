@@ -7,62 +7,6 @@
                                                     break;                      \
                                                 }
 
-void GetTokens (const char *fileName, Token *tokens) {
-    ASSERT_OK (fileName == nullptr, PrintErrors (NULLPTR); return);
-    ASSERT_OK (tokens == nullptr, PrintErrors (NULLPTR); return);
-
-    char *src = nullptr;
-    GetBuffer (&src, fileName);
-
-    printf ("%s", src);
-
-    tokens->topNode = (TreeNode *)calloc (strlen (src) + 1, sizeof (TreeNode));
-    tokens->numberOfNodes = 0;
-
-    while (*src != '\0') {
-        SkipSpaces (src);
-
-        double val = 0;
-        int n = 0;
-        char dest[30] = {};
-
-        sscanf (src, "%lg%n", &val, &n);
-        if (n != 0) {
-            src += n;
-
-            PushNumberToNode (tokens->topNode + tokens->numberOfNodes, val);
-            tokens->numberOfNodes++;
-
-            printf ("%lg\n", val);
-
-            continue;
-        }
-
-        int count = GetWordFromString (dest, src);
-        src += count;
-
-        int type = GetTypeOfNode (dest);
-        if (type == FALSE) {
-            SkipSpaces (src);
-
-            if (*src == '(') {
-                ALLOC_DATA_FOR_STR ((tokens->topNode + tokens->numberOfNodes), dest, FUNCTION);
-            }
-            else {
-                ALLOC_DATA_FOR_STR ((tokens->topNode + tokens->numberOfNodes), dest,VARIABLE);
-            }
-
-            tokens->numberOfNodes++;
-
-            continue;
-        }
-
-        ALLOC_DATA_FOR_STR ((tokens->topNode + tokens->numberOfNodes), dest, type);
-
-        tokens->numberOfNodes++;
-    }
-}
-
 int main (const int argc, const char *argv []) {
     ASSERT_OK (argc <= 1, PrintErrors (NULLPTR); return 0);
     ASSERT_OK (argv == nullptr, PrintErrors (NULLPTR); return 0);
@@ -71,24 +15,36 @@ int main (const int argc, const char *argv []) {
 
     GetTokens (argv [1], &token);
 
-    printf ("number of tokens - %d\n", token.numberOfNodes);
-
-    printf ("type of token - %d\n token's name - %s\n", token.topNode->type, (char *)token.topNode->data);
+    MemoryController mem = {};
+    mem.adr = (TreeNode **)calloc (token.numberOfNodes, sizeof (TreeNode *));
+    mem.size = 0;
 
     int index = 0;
 
-    TreeNode *topNode = GetFuncDef (&token, &index);
+    TreeNode *topNode = GetCode (&token, &index, &mem);
 
     FILE *dump = fopen ("DumpTree.txt", "w");
 
-    printf ("pointer - %p\nname - %s\n", (void *)topNode, (char *)topNode->data);
-
     DumpTree (topNode, dump);
+
+    for (int i = 0; i < token.numberOfNodes; i++) {
+        free ((token.topNode + i)->data);
+    }
+
+    free (token.topNode);
+
+    for (int i = 0; i < mem.size; i++) {
+        free (mem.adr[i]->data);
+        free (mem.adr[i]);
+    }
+
+    free (mem.adr);
     
     return 0;
 }
 
-#undef ASSERT_OK
+
+
 
 int GetTypeOfNode (char *src) {
     assert (src);
@@ -101,3 +57,80 @@ int GetTypeOfNode (char *src) {
 
     return FALSE;
 }
+
+void GetTokens (const char *fileName, Token *tokens) {
+    ASSERT_OK (fileName == nullptr, PrintErrors (NULLPTR); return);
+    ASSERT_OK (tokens == nullptr, PrintErrors (NULLPTR); return);
+
+    char *src = GetBuffer (fileName);
+
+    tokens->topNode = (TreeNode *)calloc (strlen (src) + 1, sizeof (TreeNode));
+    // check asset ok
+    
+    tokens->numberOfNodes = 0;
+
+    SeparateText (tokens, src);
+
+    free (src);
+}
+
+void SeparateText (Token *token, char *src) {
+    assert (token);
+    assert (src);
+
+    while (*src != '\0') {
+        SkipSpaces (src);
+
+        double val = 0;
+        int n = 0;
+        char dest[30] = {};
+
+        if (*src == '+' || *src == '-') {
+            char tmp[2] = {};
+            tmp[0] = *src;
+            tmp[1] = '\0';
+
+            src++;
+
+            ALLOC_DATA_FOR_STR ((token->topNode + token->numberOfNodes), tmp, OPERATION);
+            token->numberOfNodes++;
+
+            continue;
+        }
+
+        sscanf (src, "%lg%n", &val, &n);
+        if (n != 0) {
+            src += n;
+
+            PushNumberToNode (token->topNode + token->numberOfNodes, val);
+            token->numberOfNodes++;
+
+            continue;
+        }
+
+        int count = GetWordFromString (dest, src);
+        src += count;
+
+        int type = GetTypeOfNode (dest);
+        if (type == FALSE) {
+            SkipSpaces (src);
+
+            if (*src == '(') {
+                ALLOC_DATA_FOR_STR ((token->topNode + token->numberOfNodes), dest, FUNCTION);
+            }
+            else {
+                ALLOC_DATA_FOR_STR ((token->topNode + token->numberOfNodes), dest,VARIABLE);
+            }
+
+            token->numberOfNodes++;
+
+            continue;
+        }
+
+        ALLOC_DATA_FOR_STR ((token->topNode + token->numberOfNodes), dest, type);
+
+        token->numberOfNodes++;
+    }
+}
+
+#undef ASSERT_OK

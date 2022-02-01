@@ -54,21 +54,20 @@ int GetFileSize (FILE *txtFile) {
 
 #define ASSERT_OK(smth, doSmth)         do { if (smth) { doSmth;}} while (0)
 
-int GetBuffer (char **buff, const char *fileName) {
-    assert (buff);
+char *GetBuffer (const char *fileName) {
     assert (fileName);
 
     FILE *sampleFile = fopen (fileName, "r");
-    ASSERT_OK (sampleFile == nullptr, return UNABLETOOPENFILE);
+    ASSERT_OK (sampleFile == nullptr, return nullptr);
 
     int fileSize = GetFileSize (sampleFile);
 
-    *buff = (char *)calloc (fileSize + 1, sizeof (char));
+    char *buff = (char *)calloc (fileSize + 1, sizeof (char));
 
-    fileSize = fread (*buff, sizeof (char), fileSize, sampleFile);
+    fileSize = fread (buff, sizeof (char), fileSize, sampleFile);
     fclose (sampleFile);
 
-    return OK;
+    return buff;
 }
 
 int GetWordFromString (char *dest, char *src) {
@@ -80,8 +79,6 @@ int GetWordFromString (char *dest, char *src) {
     if (*src == '(' || *src == ')' || *src == ';' || *src == '+' || *src == '-' || (*src == '=' && *(src + 1) != '=')) {
         dest[0] = *src;
         dest[1] = '\0';
-
-        // printf ("%s\n", dest);
 
         return ++wordCounter;
     }
