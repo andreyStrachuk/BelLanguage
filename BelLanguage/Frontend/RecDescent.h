@@ -23,12 +23,6 @@ enum FUNCTION_TYPES {
     SQRT
 };
 
-struct MemoryController {
-    TreeNode **adr;
-
-    int size;
-};
-
 TreeNode *GetP (Token *token, int *index, MemoryController *mem);
 
 TreeNode *GetCode (Token *token, int *index, MemoryController *mem);

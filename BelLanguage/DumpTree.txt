@@ -1,147 +1,171 @@
 digraph D {
-    30816 [fillcolor=purple, style="rounded,filled", label="statement"];
-    30816 -> 30048;
+    54400 [fillcolor=purple, style="rounded,filled", label="statement"];
+    54400 -> 54480 [ color = red ];
 
-    30048 [fillcolor=cyan, style="rounded,filled", label="statement"];
-    30048 -> 28704;
+    54480 [fillcolor=cyan, style="rounded,filled", label="define"];
+    54480 -> 54528;
 
-    28704 [fillcolor=cyan, style="rounded,filled", label="statement"];
-    28704 -> 27360;
+    54528 [fillcolor=cyan, style="rounded,filled", label="function"];
+    54528 -> 54576;
 
-    27360 [fillcolor=cyan, style="rounded,filled", label="statement"];
-    27360 -> 26976;
+    54576 [fillcolor=yellow, shape=box, style="filled", label="main"];
+    54528 -> 54688 [ color = red ];
 
-    26976 [fillcolor=cyan, style="rounded,filled", label="statement"];
-    26976 -> 17304 [ color = red ];
+    54688 [fillcolor=yellow, shape=box, style="filled", label="parameter"];
+    54480 -> 54800 [ color = red ];
 
-    17304 [fillcolor=cyan, style="rounded,filled", label="="];
-    17304 -> 17264;
+    54800 [fillcolor=cyan, style="rounded,filled", label="statement"];
+    54800 -> 54848;
 
-    17264 [fillcolor=yellow, shape=box, style="filled", label="a"];
-    17304 -> 26784 [ color = red ];
+    54848 [fillcolor=cyan, style="rounded,filled", label="statement"];
+    54848 -> 54896;
 
-    26784 [fillcolor=cyan, style="rounded,filled", label="initializer"];
-    26784 -> 17344 [ color = red ];
+    54896 [fillcolor=cyan, style="rounded,filled", label="statement"];
+    54896 -> 54944;
 
-    17344 [fillcolor=yellow, shape=box, style="filled", label="89"];
-    27360 -> 17424 [ color = red ];
+    54944 [fillcolor=cyan, style="rounded,filled", label="statement"];
+    54944 -> 55024 [ color = red ];
 
-    17424 [fillcolor=cyan, style="rounded,filled", label="="];
-    17424 -> 17384;
+    55024 [fillcolor=cyan, style="rounded,filled", label="kali"];
+    55024 -> 55072;
 
-    17384 [fillcolor=yellow, shape=box, style="filled", label="b"];
-    17424 -> 27168 [ color = red ];
+    55072 [fillcolor=cyan, style="rounded,filled", label="condition"];
+    55072 -> 55152 [ color = red ];
 
-    27168 [fillcolor=cyan, style="rounded,filled", label="initializer"];
-    27168 -> 17464 [ color = red ];
+    55152 [fillcolor=cyan, style="rounded,filled", label="=="];
+    55152 -> 55200;
 
-    17464 [fillcolor=yellow, shape=box, style="filled", label="67"];
-    28704 -> 28512 [ color = red ];
+    55200 [fillcolor=yellow, shape=box, style="filled", label="b"];
+    55152 -> 55312 [ color = red ];
 
-    28512 [fillcolor=cyan, style="rounded,filled", label="define"];
-    28512 -> 28320;
+    55312 [fillcolor=yellow, shape=box, style="filled", label="13"];
+    55024 -> 55424 [ color = red ];
 
-    28320 [fillcolor=cyan, style="rounded,filled", label="function"];
-    28320 -> 17504;
+    55424 [fillcolor=cyan, style="rounded,filled", label="statement"];
+    55424 -> 55472;
 
-    17504 [fillcolor=yellow, shape=box, style="filled", label="main"];
-    28512 -> 28128 [ color = red ];
+    55472 [fillcolor=cyan, style="rounded,filled", label="statement"];
+    55472 -> 55520;
 
-    28128 [fillcolor=cyan, style="rounded,filled", label="statement"];
-    28128 -> 17664 [ color = red ];
+    55520 [fillcolor=cyan, style="rounded,filled", label="statement"];
+    55520 -> 55600 [ color = red ];
 
-    17664 [fillcolor=cyan, style="rounded,filled", label="pakul"];
-    17664 -> 27552;
+    55600 [fillcolor=cyan, style="rounded,filled", label="="];
+    55600 -> 55648;
 
-    27552 [fillcolor=cyan, style="rounded,filled", label="condition"];
-    27552 -> 17784 [ color = red ];
+    55648 [fillcolor=yellow, shape=box, style="filled", label="b"];
+    55600 -> 55760 [ color = red ];
 
-    17784 [fillcolor=cyan, style="rounded,filled", label=">"];
-    17784 -> 17744;
+    55760 [fillcolor=cyan, style="rounded,filled", label="initializer"];
+    55760 -> 55840 [ color = red ];
 
-    17744 [fillcolor=yellow, shape=box, style="filled", label="a"];
-    17784 -> 17824 [ color = red ];
+    55840 [fillcolor=cyan, style="rounded,filled", label="+"];
+    55840 -> 55888;
 
-    17824 [fillcolor=yellow, shape=box, style="filled", label="45"];
-    17664 -> 27936 [ color = red ];
+    55888 [fillcolor=yellow, shape=box, style="filled", label="b"];
+    55840 -> 56000 [ color = red ];
 
-    27936 [fillcolor=cyan, style="rounded,filled", label="statement"];
-    27936 -> 17984 [ color = red ];
+    56000 [fillcolor=yellow, shape=box, style="filled", label="1"];
+    55472 -> 56112 [ color = red ];
 
-    17984 [fillcolor=cyan, style="rounded,filled", label="="];
-    17984 -> 17944;
+    56112 [fillcolor=cyan, style="rounded,filled", label="="];
+    56112 -> 56160;
 
-    17944 [fillcolor=yellow, shape=box, style="filled", label="a"];
-    17984 -> 27744 [ color = red ];
+    56160 [fillcolor=yellow, shape=box, style="filled", label="a"];
+    56112 -> 56272 [ color = red ];
 
-    27744 [fillcolor=cyan, style="rounded,filled", label="initializer"];
-    27744 -> 18064 [ color = red ];
+    56272 [fillcolor=cyan, style="rounded,filled", label="initializer"];
+    56272 -> 56352 [ color = red ];
 
-    18064 [fillcolor=cyan, style="rounded,filled", label="+"];
-    18064 -> 18024;
+    56352 [fillcolor=cyan, style="rounded,filled", label="-"];
+    56352 -> 56400;
 
-    18024 [fillcolor=yellow, shape=box, style="filled", label="a"];
-    18064 -> 18104 [ color = red ];
+    56400 [fillcolor=yellow, shape=box, style="filled", label="b"];
+    56352 -> 56512 [ color = red ];
 
-    18104 [fillcolor=yellow, shape=box, style="filled", label="1"];
-    30048 -> 29856 [ color = red ];
+    56512 [fillcolor=yellow, shape=box, style="filled", label="1"];
+    55424 -> 56624 [ color = red ];
 
-    29856 [fillcolor=cyan, style="rounded,filled", label="define"];
-    29856 -> 29664;
+    56624 [fillcolor=cyan, style="rounded,filled", label="="];
+    56624 -> 56672;
 
-    29664 [fillcolor=cyan, style="rounded,filled", label="function"];
-    29664 -> 18224;
+    56672 [fillcolor=yellow, shape=box, style="filled", label="b"];
+    56624 -> 56784 [ color = red ];
 
-    18224 [fillcolor=yellow, shape=box, style="filled", label="sum"];
-    29664 -> 29088 [ color = red ];
+    56784 [fillcolor=cyan, style="rounded,filled", label="initializer"];
+    56784 -> 56864 [ color = red ];
 
-    29088 [fillcolor=cyan, style="rounded,filled", label="parameter"];
-    29088 -> 28896;
+    56864 [fillcolor=cyan, style="rounded,filled", label="/"];
+    56864 -> 56912;
 
-    28896 [fillcolor=cyan, style="rounded,filled", label="parameter"];
-    28896 -> 18304 [ color = red ];
+    56912 [fillcolor=yellow, shape=box, style="filled", label="a"];
+    56864 -> 57024 [ color = red ];
 
-    18304 [fillcolor=yellow, shape=box, style="filled", label="b"];
-    29088 -> 18384 [ color = red ];
+    57024 [fillcolor=yellow, shape=box, style="filled", label="b"];
+    54896 -> 57136 [ color = red ];
 
-    18384 [fillcolor=yellow, shape=box, style="filled", label="c"];
-    29856 -> 29472 [ color = red ];
+    57136 [fillcolor=cyan, style="rounded,filled", label="="];
+    57136 -> 57184;
 
-    29472 [fillcolor=cyan, style="rounded,filled", label="statement"];
-    29472 -> 18544 [ color = red ];
+    57184 [fillcolor=yellow, shape=box, style="filled", label="a"];
+    57136 -> 57296 [ color = red ];
 
-    18544 [fillcolor=cyan, style="rounded,filled", label="="];
-    18544 -> 18504;
+    57296 [fillcolor=cyan, style="rounded,filled", label="initializer"];
+    57296 -> 57376 [ color = red ];
 
-    18504 [fillcolor=yellow, shape=box, style="filled", label="b"];
-    18544 -> 29280 [ color = red ];
+    57376 [fillcolor=cyan, style="rounded,filled", label="+"];
+    57376 -> 57424;
 
-    29280 [fillcolor=cyan, style="rounded,filled", label="initializer"];
-    29280 -> 18624 [ color = red ];
+    57424 [fillcolor=cyan, style="rounded,filled", label="+"];
+    57424 -> 57472;
 
-    18624 [fillcolor=cyan, style="rounded,filled", label="+"];
-    18624 -> 18584;
+    57472 [fillcolor=cyan, style="rounded,filled", label="+"];
+    57472 -> 57520;
 
-    18584 [fillcolor=yellow, shape=box, style="filled", label="b"];
-    18624 -> 18664 [ color = red ];
+    57520 [fillcolor=cyan, style="rounded,filled", label="*"];
+    57520 -> 57568;
 
-    18664 [fillcolor=yellow, shape=box, style="filled", label="c"];
-    30816 -> 30624 [ color = red ];
+    57568 [fillcolor=yellow, shape=box, style="filled", label="2"];
+    57520 -> 57680 [ color = red ];
 
-    30624 [fillcolor=cyan, style="rounded,filled", label="define"];
-    30624 -> 30432;
+    57680 [fillcolor=yellow, shape=box, style="filled", label="23"];
+    57472 -> 57792 [ color = red ];
 
-    30432 [fillcolor=cyan, style="rounded,filled", label="function"];
-    30432 -> 18744;
+    57792 [fillcolor=yellow, shape=box, style="filled", label="45"];
+    57424 -> 57904 [ color = red ];
 
-    18744 [fillcolor=yellow, shape=box, style="filled", label="sub"];
-    30624 -> 30240 [ color = red ];
+    57904 [fillcolor=yellow, shape=box, style="filled", label="45"];
+    57376 -> 58016 [ color = red ];
 
-    30240 [fillcolor=cyan, style="rounded,filled", label="statement"];
-    30240 -> 18904 [ color = red ];
+    58016 [fillcolor=yellow, shape=box, style="filled", label="456"];
+    54848 -> 58128 [ color = red ];
 
-    18904 [fillcolor=cyan, style="rounded,filled", label="vyarnut"];
-    18904 -> 18944 [ color = red ];
+    58128 [fillcolor=cyan, style="rounded,filled", label="="];
+    58128 -> 58176;
 
-    18944 [fillcolor=yellow, shape=box, style="filled", label="1"];
+    58176 [fillcolor=yellow, shape=box, style="filled", label="b"];
+    58128 -> 58288 [ color = red ];
+
+    58288 [fillcolor=cyan, style="rounded,filled", label="initializer"];
+    58288 -> 58368 [ color = red ];
+
+    58368 [fillcolor=yellow, shape=box, style="filled", label="10"];
+    54800 -> 59232 [ color = red ];
+
+    59232 [fillcolor=cyan, style="rounded,filled", label="="];
+    59232 -> 59280;
+
+    59280 [fillcolor=yellow, shape=box, style="filled", label="a"];
+    59232 -> 59360 [ color = red ];
+
+    59360 [fillcolor=cyan, style="rounded,filled", label="initializer"];
+    59360 -> 59440 [ color = red ];
+
+    59440 [fillcolor=cyan, style="rounded,filled", label="+"];
+    59440 -> 59488;
+
+    59488 [fillcolor=yellow, shape=box, style="filled", label="a"];
+    59440 -> 59600 [ color = red ];
+
+    59600 [fillcolor=yellow, shape=box, style="filled", label="b"];
 }

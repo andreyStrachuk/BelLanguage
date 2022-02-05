@@ -7,12 +7,18 @@ TreeNode *GetCode (Token *token, int *index, MemoryController *mem) {
 
     TreeNode *nodeA = GetAssign (token, index, mem);
 
+    if (nodeA == nullptr) {
+        TreeNode *nodeF = GetFunctions (token, index, mem);
+
+        return nodeF;
+    }
+
     TreeNode *nodeSt1 = (TreeNode *)calloc (1, sizeof (TreeNode));
     ALLOC_DATA_FOR_STR (nodeSt1, "statement", STATEMENT);
     PushNodeToMemArr (mem, nodeSt1);
 
     nodeSt1->right = nodeA;
-    nodeA->parent = nodeSt1;
+    if (nodeA != nullptr) nodeA->parent = nodeSt1;
 
     while ((token->topNode + *index)->type == VARIABLE) {
         TreeNode *nodeB = GetAssign (token, index, mem);
@@ -28,7 +34,7 @@ TreeNode *GetCode (Token *token, int *index, MemoryController *mem) {
 
         nodeSt1 = nodeSt2;
     }
-
+    
     TreeNode *nodeF = GetFunctions (token, index, mem);
 
     TreeNode *nodeFCpy = nodeF;
@@ -178,6 +184,7 @@ TreeNode *GetP (Token *token, int *index, MemoryController *mem) {
         return nodeIf;
     }
     else {
+
         return GetN (token, index);
     }
 }
@@ -193,10 +200,10 @@ TreeNode *GetN (Token *token, int *index) {
 
         node->right = nullptr;
         node->left = nullptr;
-    }
 
-    if (*index + 1 < token->numberOfNodes) 
-        (*index)++;
+        if (*index + 1 < token->numberOfNodes) 
+            (*index)++;
+    }
 
     return node;
 }
@@ -242,7 +249,7 @@ TreeNode *GetAssign (Token *token, int *index, MemoryController *mem) {
 TreeNode *GetExponent (Token *token, int *index, MemoryController *mem) {
     assert (token);
     assert (index);
-
+    
     TreeNode *node1 = GetP (token, index, mem);
 
     while (*(char *)token->topNode[*index].data == '^') {
@@ -298,6 +305,7 @@ TreeNode *GetFuncDef (Token *token, int *index, MemoryController *mem) {
     TreeNode *nodeDef = nullptr;
 
     if ((token->topNode + *index)->type == FUNCTION) {
+
         TreeNode *nodeName = (token->topNode + *index);
         (*index)++;
 
@@ -319,10 +327,16 @@ TreeNode *GetFuncDef (Token *token, int *index, MemoryController *mem) {
         PushNodeToMemArr (mem, nodeFunc);
 
         nodeFunc->left = nodeName;
-        if (args != nullptr) nodeFunc->right = args;
+        if (args == nullptr) {
+            args = (TreeNode *)calloc (1, sizeof (TreeNode));
+            ALLOC_DATA_FOR_STR (args, "parameter", PARAMETER);
+
+            PushNodeToMemArr (mem, args);
+        }
+        nodeFunc->right = args;
 
         nodeName->parent = nodeFunc;
-        if (args != nullptr) args->parent = nodeFunc;
+        args->parent = nodeFunc;
 
         nodeDef = (TreeNode *)calloc (1, sizeof (TreeNode));
         ALLOC_DATA_FOR_STR (nodeDef, "define", OPERATION);
@@ -344,6 +358,7 @@ TreeNode *GetFunctions (Token *token, int *index, MemoryController *mem) {
     assert (index);
 
     TreeNode *node1 = GetFuncDef (token, index, mem);
+    assert (node1);
 
     TreeNode *nodeSt = (TreeNode *)calloc (1, sizeof (TreeNode));
     ALLOC_DATA_FOR_STR (nodeSt, "statement", STATEMENT);
@@ -511,8 +526,7 @@ void Require (Token *token, const char *symbol, int *index) {
     assert (token);
 
     if (!STR_EQ((char *)(token->topNode + *index)->data, symbol)) {
-        printf ("Syntax error!\n");
-        abort ();
+        SyntaxError ();
     }
 
     if ((*index) + 1 < token->numberOfNodes) {

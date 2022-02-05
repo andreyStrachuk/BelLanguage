@@ -107,6 +107,25 @@ int GetWordFromString (char *dest, char *src) {
     return wordCounter;
 }
 
+int GetWord (char *dest, char **src) {
+    assert (dest);
+    assert (src);
+
+    int length = 0;
+
+    while (!isspace (**src)) {
+        *dest = **src;
+        dest++;
+        (*src)++;
+
+        length++;
+    }
+
+    dest [length] = '\0';
+
+    return length;
+}
+
 #undef ASSERT_OK
 
 void PrintErrors (const int type) {

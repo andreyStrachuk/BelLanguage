@@ -1,24 +1,13 @@
-a = 89
-b = 67
-
 main ()
 begin
-	pakul(a > 45)
+	a = 2 * 23 + 45 + 45 + 456;
+	b = 10;
+	kali (b == 13)
 	begin
-		a = a + 1
-	end
+		b = b + 1;
+		a = b - 1; 
+		b = a / b
+	end;
+	
+	a = a + b
 end
-
-sum (b, c)
-begin
-	b = b + c;
-	a = 567
-end
-
-sub ()
-begin
-	vyarnut 1
-end
-
-
-

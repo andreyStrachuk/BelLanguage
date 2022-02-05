@@ -1,0 +1,58 @@
+g++ -Wall -Wextra Frontend/Tokens.cpp lib/Text/TextAnalyzer.cpp lib/Tree/Tree.cpp Frontend/RecursiveDescent.cpp -o lang
+
+
+static double GetDN (TreeNode **node, VarsTable *table) {
+    assert (node);
+
+    if ((*node)->type == NUMBER) {
+        return *(double *)(*node)->data;
+    }
+
+    if ((*node)->type == VARIABLE) {
+        return GetVarVal (*node, table);
+    }
+
+    return POISON;
+}
+
+static double GetDT (TreeNode **node, VarsTable *table) {
+    assert (node);
+
+    double val1 = GetDN (node);
+
+    while (*(char *)(*node)->data == '*' || *(char *)(*node)->data == '/') {
+        char symbol = *(char *)(*node)->data;
+
+        double val2 = GetDN (node);
+
+        if (symbol == '*') {
+            val1 = val1 * val2;
+        }
+        else {
+            val1 = val1 / val2;
+        }
+    }
+
+    return val1;
+}
+
+static double GetDE (TreeNode *node, VarsTable *table) {
+    assert (node);
+
+    double val1 = GetDT (node->left);
+
+    while (*(char *)node->data == '+' || *(char *)node->data == '-') {
+        char symbol = *(char *)node->data;
+
+        double val2 = GetDT (node->right);
+
+        if (symbol == '+') {
+            val1 = val1 + val2;
+        }
+        else {
+            val1 = val1 - val2;
+        }
+    }
+
+    return val1;
+}

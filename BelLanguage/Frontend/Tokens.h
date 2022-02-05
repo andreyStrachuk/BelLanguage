@@ -10,9 +10,10 @@ struct Token {
     int numberOfNodes;
 };
 
-enum ResOfCheck {
-    TRUE = -20,
-    FALSE = -19
+struct MemoryController {
+    TreeNode **adr;
+
+    int size;
 };
 
 void GetTokens (const char *fileName, Token *tokens);
@@ -26,3 +27,7 @@ void SetName (TreeNode *node, char *src);
 int GetNumberOfNode (char *src);
 
 void SeparateText (Token *token, char *src);
+
+void TreeDestructor (Token *token, MemoryController *mem);
+
+void MemControllerCtor (Token *token, MemoryController *mem);

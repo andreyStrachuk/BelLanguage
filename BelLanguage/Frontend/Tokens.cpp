@@ -1,12 +1,5 @@
 #include "RecDescent.h"
 
-#define ASSERT_OK(smth, doSmth)         do { if (smth) { doSmth;}} while (0)
-
-#define SkipSpaces(src)                         src = SkipSpaceSymbols (src);   \
-                                                if (*src == '\0') {             \
-                                                    break;                      \
-                                                }
-
 int main (const int argc, const char *argv []) {
     ASSERT_OK (argc <= 1, PrintErrors (NULLPTR); return 0);
     ASSERT_OK (argv == nullptr, PrintErrors (NULLPTR); return 0);
@@ -16,8 +9,7 @@ int main (const int argc, const char *argv []) {
     GetTokens (argv [1], &token);
 
     MemoryController mem = {};
-    mem.adr = (TreeNode **)calloc (token.numberOfNodes, sizeof (TreeNode *));
-    mem.size = 0;
+    MemControllerCtor (&token, &mem);
 
     int index = 0;
 
@@ -27,18 +19,13 @@ int main (const int argc, const char *argv []) {
 
     DumpTree (topNode, dump);
 
-    for (int i = 0; i < token.numberOfNodes; i++) {
-        free ((token.topNode + i)->data);
-    }
+    FILE *treetxt = fopen ("tree.txt", "w");
 
-    free (token.topNode);
+    PrintTreeToFile (topNode, treetxt);
 
-    for (int i = 0; i < mem.size; i++) {
-        free (mem.adr[i]->data);
-        free (mem.adr[i]);
-    }
+    TreeDestructor (&token, &mem);
 
-    free (mem.adr);
+    fclose (treetxt);
     
     return 0;
 }
@@ -131,6 +118,31 @@ void SeparateText (Token *token, char *src) {
 
         token->numberOfNodes++;
     }
+}
+
+void TreeDestructor (Token *token, MemoryController *mem) {
+    assert (mem);
+    assert (token);
+
+    for (int i = 0; i < token->numberOfNodes; i++) {
+        free ((token->topNode + i)->data);
+    }
+
+    free (token->topNode);
+
+    for (int i = 0; i < mem->size; i++) {
+        free (mem->adr[i]->data);
+        free (mem->adr[i]);
+    }
+
+    free (mem->adr);
+}
+
+void MemControllerCtor (Token *token, MemoryController *mem) {
+    assert (mem);
+
+    mem->adr = (TreeNode **)calloc (token->numberOfNodes, sizeof (TreeNode *));
+    mem->size = 0;
 }
 
 #undef ASSERT_OK

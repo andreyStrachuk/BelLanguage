@@ -10,11 +10,15 @@ void DestructTree (TreeNode *topNode) {
         return;
     }
 
-    DestructTree (topNode->right);
-
     if (topNode->left != nullptr) {
         DestructTree (topNode->left);
+
+        free (topNode->left);
     }
+
+    DestructTree (topNode->right);
+
+    free (topNode->right);
 }
 
 void PushNumberToNode (TreeNode *node, const double val) {
@@ -104,3 +108,65 @@ void DumpData (TreeNode *node, FILE *dump) {
         }
     }
 }
+
+#define ASSERT_OK(smth, doSmth)         do { if (smth) { doSmth;}} while (0)
+
+int PrintTreeToFile (TreeNode *node, FILE *file) {
+    assert (node);
+    assert (file);
+
+    int res = 0;
+
+    if (node->right == nullptr) {
+        fprintf (file, "( ");
+        PrintDataToFile (node, file);
+        fprintf (file, " ) ");
+
+        return OK;
+    }
+
+    fprintf (file, "( ");
+
+    if (node->left != nullptr) {
+        res = PrintTreeToFile (node->left, file);
+        ASSERT_OK(res != OK, PrintErrors (res); return res);
+    }
+
+    PrintDataToFile (node, file);
+    fprintf (file, " ");
+
+    if (node->right != nullptr) {
+        res = PrintTreeToFile (node->right, file);
+        ASSERT_OK(res != OK, PrintErrors (res); return res);
+    }
+
+    fprintf (file, ") ");
+
+    return OK;
+}
+
+void PrintDataToFile (TreeNode *node, FILE *file) {
+    assert (node);
+    assert (file);
+
+    if (node->type == NUMBER) {
+        fprintf (file, "%d %lg ", node->type, *(double *)node->data);
+    }
+    else {
+        fprintf (file, "%d %s ", node->type, (char *)node->data);
+    }
+}
+
+int DoubleComp (const double val1, const double val2) {
+    if (fabs(val1 - val2) < EPS) {
+        return EQUAL;
+    }
+
+    if (val1 > val2) {
+        return BIGGER;
+    }
+
+    return LESS;
+}
+
+#undef ASSERT_OK
