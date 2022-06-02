@@ -52,8 +52,8 @@ void GetTokens (const char *fileName, Token *tokens) {
     char *src = GetBuffer (fileName);
 
     tokens->topNode = (TreeNode *)calloc (strlen (src) + 1, sizeof (TreeNode));
-    // check asset ok
-    
+
+
     tokens->numberOfNodes = 0;
 
     SeparateText (tokens, src);
@@ -73,7 +73,7 @@ void SeparateText (Token *token, char *src) {
         char dest[30] = {};
 
         if (*src == '+' || *src == '-') {
-            char tmp[2] = {};
+	    char tmp[2] = {};
             tmp[0] = *src;
             tmp[1] = '\0';
 
@@ -97,7 +97,7 @@ void SeparateText (Token *token, char *src) {
 
         int count = GetWordFromString (dest, src);
         src += count;
-
+ 
         int type = GetTypeOfNode (dest);
         if (type == FALSE) {
             SkipSpaces (src);

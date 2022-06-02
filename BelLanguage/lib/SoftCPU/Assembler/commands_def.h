@@ -126,7 +126,6 @@ DEF_CMD_(je, 0x0D, 2,
 
         int retVal = index + 2;
 
-        PUSHCALLSTACK();
         continue;
     }
     SKIPJMPVAL();
@@ -138,6 +137,24 @@ DEF_CMD_(je, 0x0D, 2,
 
 DEF_CMD_(jne, 0x0E, 2,
 {
+    // printf ("I am fucking here in cpu!1\n");
+    // topVal = POPSTACK();
+    // printf ("I am fucking here in cpu!1\n");
+    // prevTopVal = POPSTACK();
+
+    // printf ("I am fucking here in cpu!2\n");
+
+    // if (fabs(topVal - prevTopVal) > 1e-6) {
+    //     int index = softCPU->ip;
+    //     softCPU->ip = *(u_int16_t *)(softCPU->machineCode + index);
+
+    //     printf ("inside !!!\n");
+
+    //     continue;
+    // }
+    // SKIPJMPVAL();
+    // continue;
+
     topVal = POPSTACK();
     prevTopVal = POPSTACK();
 
@@ -145,9 +162,6 @@ DEF_CMD_(jne, 0x0E, 2,
         int index = softCPU->ip;
         softCPU->ip = *(u_int16_t *)(softCPU->machineCode + index);
 
-        int retVal = index + 2;
-
-        PUSHCALLSTACK();
         continue;
     }
     SKIPJMPVAL();
@@ -187,6 +201,7 @@ DEF_CMD_(ret, 0x11, 0,
     int index = (int)POPCALLSTACK();
 
     softCPU->ip = index;
+    
     continue;
 }, 
 {
@@ -227,7 +242,6 @@ DEF_CMD_(jb, 0x14, 2,
 
         int retVal = index + 2;
 
-        PUSHCALLSTACK();
         continue;
     }
 
@@ -247,8 +261,27 @@ DEF_CMD_(jae, 0x15, 2,
         int index = softCPU->ip;
         softCPU->ip = *(u_int16_t *)(softCPU->machineCode + index);
         int retVal = index + 2;
+        
+        continue;
+    }
 
-        PUSHCALLSTACK();
+    SKIPJMPVAL();
+    continue;
+},
+{
+    ARRANGEJMPS();
+} )
+
+DEF_CMD_(jbe, 0x16, 2,
+{
+    topVal = POPSTACK();
+    prevTopVal = POPSTACK();
+
+    if (topVal <= prevTopVal) {
+        int index = softCPU->ip;
+        softCPU->ip = *(u_int16_t *)(softCPU->machineCode + index);
+        int retVal = index + 2;
+        
         continue;
     }
 

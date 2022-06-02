@@ -1,0 +1,23 @@
+main ()
+begin
+	a = 0;
+	atrymac (a);
+	b = factorial (a);
+	nadrukavac (b)
+	
+end
+
+factorial (n)
+begin
+	kali (n == 1)
+	begin
+		vyarnut 1
+	end;
+	
+	a = n - 1;
+	b = factorial (a);
+
+	c = n * b;
+	
+	vyarnut c
+end

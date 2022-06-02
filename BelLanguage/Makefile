@@ -1,17 +1,18 @@
 CC=g++
 
-CFLAGS=-Werror -Wpedantic -Wextra -Wall
+CFLAGS= -Wpedantic -Wextra -Wall
 
-SRC_FRONT=Frontend/Tokens.cpp lib/Text/TextAnalyzer.cpp lib/Tree/Tree.cpp
+SRC_FRONT=Frontend/Tokens.cpp Frontend/RecursiveDescent.cpp lib/Text/TextAnalyzer.cpp lib/Tree/Tree.cpp
 
-Frontend=asm
-Lib=cpu
+SRC_BACK=Backend/Backend.cpp Backend/BackendFunctions.cpp lib/Text/TextAnalyzer.cpp lib/Tree/Tree.cpp
 
-all: $(Frontend) $(SRC_FRONT) $(Lib) $(SRC_LIB)
+Frontend=front
+Backend=back
+
+all: $(Frontend) $(SRC_FRONT) $(Backend) $(SRC_BACK)
 
 $(Frontend): $(SRC_FRONT)
-	$(CC) $(SRC_FRONT)   $(CFLAGS) -o $(Frontend)
-
-
-$(Lib): $(SRC_LIB)
-	$(CC) $(SRC_LIB) $(CFLAGS) -o $(Lib)
+	$(CC) $(CFLAGS) $(SRC_FRONT) -o $(Frontend)
+	
+$(Backend): $(SRC_BACK)
+	$(CC) $(CFLAGS) $(SRC_BACK) -o $(Backend)

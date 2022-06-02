@@ -22,6 +22,17 @@ struct TreeNode {
 
 enum TypeOfToken {
     KEYWORD = 1,
+    MINUS,
+    PLUS,
+    EQUALS,
+    EQUALEQUAL,
+    MORE,
+    WHILE,
+    BPARENTHESIS,
+    RETURN,
+    MUL,
+    DIV,
+    IF,
     INITIALIZER,
     STATEMENT,
     NUMBER,
@@ -32,7 +43,11 @@ enum TypeOfToken {
     CONDITION,
     OPERATION,
     END_OF_STR,
-    PARAMETER
+    PRINT,
+    SCAN,
+    SQRT,
+    PARAMETER,
+    CALL
 };
 
 enum ResOfComp {

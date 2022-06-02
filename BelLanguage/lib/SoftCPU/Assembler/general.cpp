@@ -293,7 +293,7 @@ int ArrangePushAndPopCmd (char *src, const int typeOfCmd, char *machineCode, int
         machineCode[(*sizeOfCodeArr)++] = cmdNumber;                                          
         PutInt (shift, machineCode, sizeOfCodeArr);    
 
-        return OK;                                                                     
+        return OK;                                                                
     }
 
     resOfScan = sscanf (src, "[%d+%2s]%n", &shift, reg, &ok);                               
@@ -313,7 +313,7 @@ int ArrangePushAndPopCmd (char *src, const int typeOfCmd, char *machineCode, int
         return OK;                                                                         
     }
 
-    resOfScan = sscanf (src, "[%s]%n", reg, &ok);                                          
+    resOfScan = sscanf (src, "[%2s]%n", reg, &ok);                                          
                                                                                                                     
     if (ok == 4) {                                                                          
         src = SkipReadWord (src);                                                           

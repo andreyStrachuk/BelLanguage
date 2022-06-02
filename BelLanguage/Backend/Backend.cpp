@@ -21,16 +21,14 @@ int main (const int argc, const char *argv []) {
     var.free = 0;
     var.vars = (Variable *)calloc (varsNum, sizeof (Variable));
 
-    FillVarsTable (node, &var);
-
     ASTtoAsm (node, &var);
 
-    FILE *file = fopen ("DumpTree.txt", "w");
+    // FILE *file = fopen ("DumpTree.txt", "w");
 
-    DumpTree (node, file);
+    // DumpTree (node, file);
 
-    DestructTree (node);
-    free (node);
+    // DestructTree (node);
+    // free (node);
 
     return 0;
 }

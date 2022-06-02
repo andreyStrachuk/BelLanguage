@@ -56,3 +56,138 @@ static double GetDE (TreeNode *node, VarsTable *table) {
 
     return val1;
 }
+
+main ()
+begin
+	a = 2 * 23 + 45 + 45 + 456;
+	b = 10;
+	pakul (b == 13)
+	begin
+		b = b + 1;
+		a = b - 1; 
+		b = a / b
+	end;
+	
+	a = a + b;
+	
+	nadrukavac (a)
+end
+
+factorial (n)
+begin
+	kali (n < 2)
+	begin
+		vyarnut 1
+	end;
+	
+	a = n - 1;
+	
+	vyarnut n * factorial (a)
+
+end
+
+
+push 20
+pop bx
+jmp main
+:fctr
+push [bx + 0]
+push 1
+JE TRUE1
+jmp FALSE1
+:TRUE1
+push 1
+pop cx
+:RET
+jmp END1
+:FALSE1
+jmp END1
+:END1
+push [bx + 0]
+push 1
+sub
+pop [bx + ax]
+push ax
+push 1
+add
+pop ax
+push ax
+pop [bx + ax]
+push ax
+push 1
+add
+pop ax
+push ax
+push bx
+add
+pop bx
+push 0
+pop ax
+push [bx + 1]
+pop [bx + ax]
+push ax
+push 1
+add
+pop ax
+:CALL fctr
+push cx
+push [bx - 1]
+pop ax
+push bx
+push ax
+sub
+push 1
+sub
+pop bx
+pop [bx + ax]
+push ax
+push 1
+add
+pop ax
+push [bx + 2]
+push [bx + 0]
+MUL
+pop cx
+:RET
+
+
+:main
+push ax
+pop [bx + ax]
+push ax
+push 1
+add
+pop ax
+push ax
+push bx
+add
+pop bx
+push 0
+pop ax
+push 5
+pop [bx + ax]
+push ax
+push 1
+add
+pop ax
+:CALL fctr
+push cx
+push [bx - 1]
+pop ax
+push bx
+push ax
+sub
+push 1
+sub
+pop bx
+pop [bx + ax]
+push ax
+push 1
+add
+pop ax
+push [bx + 0]
+out
+pop
+
+hlt
+

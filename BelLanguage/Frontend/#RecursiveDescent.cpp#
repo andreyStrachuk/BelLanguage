@@ -57,7 +57,6 @@ TreeNode *GetE (Token *token, int *index, MemoryController *mem) {
 
     while (*(char *)token->topNode[*index].data == '+' || *(char *)token->topNode[*index].data == '-') {
         nodeOp = &(token->topNode[*index]);
-
         (*index)++;
 
         TreeNode *node2 = GetT (token, index, mem);
@@ -266,7 +265,7 @@ TreeNode *GetExponent (Token *token, int *index, MemoryController *mem) {
         nodeOp->right = node2;
 
         node1 = nodeOp;
-    } 
+    }
 
     return node1;
 }

@@ -15,13 +15,13 @@
 
 #define STR_EQ(str1, str2)             (strncmp (str1, str2, strlen (str1)) == 0)
 
-enum FUNCTION_TYPES {
-    NOTFOUND,
-    COS,
-    SIN,
-    LN,
-    SQRT
-};
+// enum FUNCTION_TYPES {
+//     NOTFOUND,
+//     COS,
+//     SIN,
+//     LN,
+//     SQRT
+// };
 
 TreeNode *GetP (Token *token, int *index, MemoryController *mem);
 

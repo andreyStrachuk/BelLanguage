@@ -174,7 +174,7 @@ int DetectPushnPop (char *srcName, CPU *softCPU, const int type) { //!TODO separ
                                                                             
             PUSHSTACK();                                   
         }                                                                   
-        if (STR_EQ (srcName, N_POP)) {                                        
+        if (STR_EQ (srcName, N_POP)) {                                       
                                                                             
             val = POPSTACK();                                   
                                                                             
@@ -203,7 +203,7 @@ int DetectPushnPop (char *srcName, CPU *softCPU, const int type) { //!TODO separ
                                                                             
             val = POPSTACK();                                   
                                                                             
-            WRITETORAM (shift);                                     
+            WRITETORAM (shift);                                    
         }                                                                   
         return OK;                                                          
     }                                                                       
@@ -214,22 +214,22 @@ int DetectPushnPop (char *srcName, CPU *softCPU, const int type) { //!TODO separ
                                                                             
         index = GetRegValue (typeOfReg, softCPU);                           
                                                                             
-        ASSERT_OKAY (index > RAMVOLUME, return WRONG_ADDRESS; )                                                                   
-                                                                            
-        if (STR_EQ (srcName, N_PUSH)) {                                       
-            GETRAMVAL (index);                                     
-                                                                            
+        ASSERT_OKAY (index > RAMVOLUME, return WRONG_ADDRESS; )                                                              
+                                                                           
+        if (STR_EQ (srcName, N_PUSH)) {            
+            GETRAMVAL (index);
+
             PUSHSTACK();                                   
         }                                                                   
         if (STR_EQ (srcName, N_POP)) {                                        
             val = POPSTACK();                                   
-                                                                            
+                                                                      
             WRITETORAM (index);                                     
         }                                                                   
         return OK;                                                           
     }                                                                       
     if (res == MEMREGIMM) {                                                 
-        int typeOfReg = *(softCPU->machineCode + softCPU->ip);              
+        int typeOfReg = *(softCPU->machineCode + softCPU->ip);         
                                                                             
         softCPU->ip++;                                                      
                                                                             
