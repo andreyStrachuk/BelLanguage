@@ -1,0 +1,23 @@
+main ()
+pachac
+	a = 0;
+	atrymac (a);
+	b = factorial (a);
+	nadrukavac (b)
+	
+skoncyc
+
+factorial (n)
+pachac
+	kali (n == 1)
+	pachac
+		vyarnut 1
+	skoncyc;
+	
+	a = n - 1;
+	b = factorial (a);
+
+	c = n * b;
+	
+	vyarnut c
+skoncyc

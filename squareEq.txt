@@ -1,0 +1,50 @@
+main ()
+pachac
+	a = 0;
+	b = 0;
+	c = 0;
+	numberOfRoots = 0;
+	atrymac (a, b, c);
+
+	kali (a == 0)
+	pachac
+		kali (b == 0)
+		pachac
+			kali (c == 0)
+			pachac
+				numberOfRoots = -1;
+				nadrukavac (numberOfRoots);
+
+				vyarnut 0
+			skoncyc
+		skoncyc
+	skoncyc;
+
+	D = b * b - 4 * a * c;
+
+	kali (D == 0)
+	pachac
+		x = -1 * b / 2 / a;
+		numberOfRoots = 1;
+		nadrukavac (numberOfRoots, x);
+
+		vyarnut 0
+	skoncyc;
+
+	kali (D < 0)
+	pachac
+		numberOfRoots = 0;
+		nadrukavac (numberOfRoots);
+
+		vyarnut 0
+	skoncyc;
+
+	d = sqrt (D);
+	xst = (-1 * b + d) / 2;
+	xnd = (-1 * b - d) / 2;
+	
+	numberOfRoots = 2;
+	
+	nadrukavac (numberOfRoots, xst, xnd)
+
+skoncyc

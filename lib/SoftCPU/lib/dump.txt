@@ -1,0 +1,4 @@
+Pointer to the stack is null!
+Error code: 9
+
+Stack  <i>  [(nil)]  "st"  void InitStack(Stack*)  at  stack.cpp(8)
