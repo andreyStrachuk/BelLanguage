@@ -147,6 +147,30 @@ atrymac (a, d, g)
 
 These functions support variable number of args. As a result, you can type ```nadrukavac(a)``` and ```nadrukavac(a, b, c, d)``` and it'll work.
 
+## Compilation
+
+How is compilation going?
+
+The project itself consists of 3 major parts: frontend, backend, and cpu.
+1. Frontend
+
+
+It is used to create AST (Abstract Syntax Tree) and saves it in IR (intermediate representation). First of all, file with code is divided into lexems. After that, frontend builds an AST from them. Visual representation of this tree is below:
+![AST](DumpTree.txt.png "AST")
+This is AST for Square equation solver
+
+2. Backend
+
+
+This part of the program is responsible for translating AST into asm code for my SoftCPU. It rtaverses the tree and print in file asm instructions.
+
+3. SoftCPU
+
+
+It runs program. Processor translates asm code from backend to binary and, then, executes it.
+
+Also, there is a driver which runs all parts of the compiler.
+
 ## Installation
 
 ```
